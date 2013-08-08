@@ -1,0 +1,24 @@
+.shareme_sharelink {
+	padding: 0 0 0 5px;
+	vertical-align: top;//for 2.3+
+}
+.button_count a.connect_widget_like_button {
+	height: 19px;
+	padding: 4px 5px 0;
+}
+.shareme_text.right {
+	margin-left: 10px;
+}
+.shareme_text.left {
+	margin-right: 10px;
+}
+.shareme_pin_shareimg {
+	margin-bottom: -1px;
+	vertical-align: top;//for 2.3+
+}
+.shareme_shareimg {
+	vertical-align: top;//for 2.3+
+}
+.shareme_shareimg:hover, .shareme_pin_shareimg:hover {
+	opacity: 0.6;
+}
