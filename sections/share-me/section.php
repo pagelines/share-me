@@ -65,7 +65,7 @@ class ShareMe extends PageLinesSection {
 				else if ($this->opt('shareme_text_float') == 'text_right')
 					echo 'right';
 			?>" data-sync="shareme_text_greeting" style="<?php echo $styles;?>">
-			<?php echo $this->opt('shareme_text_greeting');?></div>
+            <?php echo $this->opt('shareme_text_greeting'); ?></div>
 			<div class="shareme_icons <?php
 				if ($this->opt('shareme_icon_float') == 'icons_left')
 					echo 'left';
