@@ -97,7 +97,7 @@ class ShareMe extends PageLinesSection {
 					printf($string, $url, 'Share on Facebook', $this->base_url.'/facebook.png', 'Facebook');
 				}
 				if($this->opt('shareme_tw')){
-					$url = sprintf('http://twitter.com/share?url=%s&text=%s&via=%s&hashtags=%s', $upermalink, urlencode(html_entity_decode(get_the_title())), ($this->opt('twittername')) ? ($this->opt('twittername')) : '', (' '.urlencode(html_entity_decode($this->opt('site-hashtag')))));					
+					$url = sprintf('http://twitter.com/home?status=%s%s%s', urlencode(html_entity_decode(get_the_title())), (' ' . urlencode(get_permalink($post->ID))), ($this->opt('twittername')) ? (' @' . $this->opt('twittername')) : '');					
 					printf($string, $url, 'Share on Twitter', $this->base_url.'/twitter.png', 'Twitter');
 				}
 				if($this->opt('shareme_su')){
