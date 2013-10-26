@@ -6,23 +6,23 @@
 	Description: Share Me allows your visitors to share content to the most popular social media sites and includes a customizable instructional greeting.
 	Class Name: ShareMe
 	Demo:
-	Version: 1.0
+	Version: 1.1
 	Filter: social
 */
 
 class ShareMe extends PageLinesSection {
 
-	const version = '1.0';
+	const version = '1.1';
 
 /* STUFF THAT LOADS ONLY IN THE SECTION HEADER */
 
 	function section_head() {
 		
-		echo load_custom_font($this->opt('shareme_text_font', $this->oset),'.shareme_text');
-		if($this->opt('shareme_google', $this->oset)){
+		echo load_custom_font($this->opt('shareme_text_font'),'.shareme_text');
+		if($this->opt('shareme_google')){
 			?><script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script> <?php
 		}
-		if($this->opt('shareme_pin', $this->oset)){
+		if($this->opt('shareme_pin')){
 			?><script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script><?php
 		}
 		
@@ -54,8 +54,8 @@ class ShareMe extends PageLinesSection {
 	function section_template() {
 
 		global $post;
-		$textcolor = sprintf('color:%s; ',pl_hashify($this->opt('shareme_text_color',$this->oset)));
-		$textsize = sprintf('font-size:%spx;',($this->opt('shareme_text_size',$this->oset)));
+		$textcolor = sprintf('color:%s; ',pl_hashify($this->opt('shareme_text_color')));
+		$textsize = sprintf('font-size:%spx;',($this->opt('shareme_text_size')));
 		$styles = $textcolor.'' .$textsize.'';
 		?>
 		<div class="shareme">
@@ -87,7 +87,7 @@ class ShareMe extends PageLinesSection {
 					printf('<div class="g-plusone" data-annotation="none"></div>');
 				}
 				if($this->opt('shareme_pin')){
-					$url = sprintf('http://pinterest.com/pin/create/button/?url=%s&amp;media=%s&amp;description=%s on %s', $upermalink, $image_url, $post->post_title, $upermalink);
+					$url = sprintf('http://pinterest.com/pin/create/button/?url=%s&amp;media=%s&amp;description=%s via %s', $upermalink, $image_url, $post->post_title, $upermalink);
 					printf($pinstring, $url, 'Share on Pinterest', $this->base_url.'/sbe_pinit.png', 'Pinterest');
 				}
 				if($this->opt('shareme_fb')){
@@ -95,7 +95,7 @@ class ShareMe extends PageLinesSection {
 					printf($string, $url, 'Share on Facebook', $this->base_url.'/facebook.png', 'Facebook');
 				}
 				if($this->opt('shareme_tw')){
-					$url = sprintf('http://twitter.com/home?status=%s%s%s', pagelines_format_tweet(urlencode(html_entity_decode(get_the_title())), get_permalink($post->ID)), ($this->opt('twittername')) ? (' @'.$this->opt('twittername')) : '', (' '.urlencode(html_entity_decode($this->opt('site-hashtag')))));
+					$url = sprintf('http://twitter.com/share?url=%s&text=%s&via=%s&hashtags=%s', $upermalink, urlencode(html_entity_decode(get_the_title())), ($this->opt('twittername')) ? ($this->opt('twittername')) : '', (' '.urlencode(html_entity_decode($this->opt('site-hashtag')))));					
 					printf($string, $url, 'Share on Twitter', $this->base_url.'/twitter.png', 'Twitter');
 				}
 				if($this->opt('shareme_su')){
@@ -125,6 +125,9 @@ class ShareMe extends PageLinesSection {
 					?><a class="shareme_sharelink" href="javascript:window.print()" title="Print This Page"><img src="<?php echo ($this->base_url.'/print.png') ?>" alt="" /></a><?php
 					//printf($string, $url, 'Print This Page', $this->base_url.'/print.png', 'Print');
 				}*/
+				if ( ('' == $this->opt('shareme_google')) && ('' == $this->opt('shareme_pin')) && ('' == $this->opt('shareme_fb')) && ('' == $this->opt('shareme_tw')) && ('' == $this->opt('shareme_su')) && ('' == $this->opt('shareme_redd')) && ('' == $this->opt('shareme_del')) && ('' == $this->opt('shareme_digg')) && ('' == $this->opt('shareme_linkedin')) && ('' == $this->opt('shareme_email')) ) {
+					echo setup_section_notify($this, 'Please set up Share Me');
+				}
 				?>
 			</div> <!--END icons div-->
 			<div class="clear"></div>
